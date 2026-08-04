@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INKD.SYS — Case Study | DarkCat Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-base: #0d0d0f;
+    --bg-surface: #17171b;
+    --bg-surface-raised: #1f1f24;
+    --pink: #ff2d78;
+    --pink-deep: #b3134f;
+    --lime: #b6ff00;
+    --violet: #9d00ff;
+    --cyan: #00f0ff;
+    --chrome: #c8ccd1;
+    --chrome-dark: #8b8f96;
+    --text-primary: #f5f5f7;
+    --text-secondary: #a8a8b3;
+    --on-accent: #0d0d0f;
+    --border: #2a2a30;
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 16px;
+    --r-pill: 999px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+
+  .mono {
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+
+  section { padding: 100px 0; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 140px 0 110px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 700px 400px at 30% 0%, rgba(255,45,120,0.14), transparent 60%),
+      radial-gradient(ellipse 700px 400px at 75% 20%, rgba(182,255,0,0.08), transparent 60%);
+  }
+  .hero .eyebrow {
+    font-size: 12px;
+    color: var(--lime);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .hero h1 {
+    font-size: clamp(64px, 10vw, 120px);
+    margin-bottom: 20px;
+  }
+  .hero .tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--pink);
+    font-size: clamp(16px, 2vw, 24px);
+    letter-spacing: 1px;
+    max-width: 760px;
+    margin: 0 auto 24px;
+  }
+  .hero p.desc {
+    color: var(--text-secondary);
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+
+  /* ---------- SECTION LABEL ---------- */
+  .section-title {
+    font-size: 36px;
+    margin-bottom: 48px;
+  }
+  .kicker {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .kicker.pink { color: var(--pink); }
+  .kicker.lime { color: var(--lime); }
+
+  /* ---------- O PROJETO ---------- */
+  .projeto-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .projeto-grid p {
+    color: var(--text-secondary);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .persona-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .persona-card:last-child { margin-bottom: 0; }
+  .persona-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .persona-card p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ---------- GALLERY / PHONE MOCKUPS ---------- */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .screen-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .screen-item .caption {
+    font-size: 11px;
+    color: var(--pink);
+  }
+
+  .phone {
+    width: 240px;
+    height: 519px;
+    background: var(--bg-base);
+    border: 6px solid #000;
+    border-radius: 34px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+    font-size: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .statusbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+  .statusbar .right { display: flex; gap: 4px; align-items: center; color: var(--text-secondary); font-weight: 400; }
+  .screen-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 16px 10px;
+  }
+  .screen-body { flex: 1; padding: 0 16px 16px; overflow: hidden; display: flex; flex-direction: column; gap: 10px; }
+
+  .pill-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: var(--r-pill);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    text-align: center;
+  }
+  .pill-btn.lime { background: var(--lime); color: var(--on-accent); }
+  .pill-btn.pink { background: var(--pink); color: var(--text-primary); }
+  .pill-btn.outline { background: transparent; border: 1px solid var(--chrome); color: var(--text-primary); }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 6.5px;
+    padding: 3px 7px;
+    border-radius: var(--r-sm);
+    display: inline-block;
+    letter-spacing: 0.5px;
+  }
+  .tag.lime { background: rgba(182,255,0,0.15); color: var(--lime); }
+  .tag.pink { background: rgba(255,45,120,0.15); color: var(--pink); }
+  .tag.cyan { background: rgba(0,240,255,0.15); color: var(--cyan); }
+
+  .card-row { display: flex; gap: 8px; }
+  .thumb {
+    border-radius: var(--r-sm);
+    background: linear-gradient(135deg, #2a1a30, #16161c 60%);
+    position: relative;
+    overflow: hidden;
+  }
+  .thumb::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,45,120,0.25), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(0,240,255,0.18), transparent 50%);
+  }
+
+  .avatar-thumb { width: 40px; height: 40px; border-radius: var(--r-sm); flex-shrink: 0; }
+
+  .banner {
+    background: linear-gradient(90deg, var(--violet), #6a00b3);
+    border-radius: var(--r-sm);
+    padding: 8px 10px;
+  }
+  .banner .label { font-family: 'Space Mono', monospace; font-size: 6px; color: rgba(255,255,255,0.75); display:block; margin-bottom: 2px; }
+  .banner .value { font-family: 'Bebas Neue', sans-serif; font-size: 11px; color: #fff; letter-spacing: 0.5px; }
+
+  .stat-box {
+    background: var(--bg-surface-raised);
+    border-radius: var(--r-sm);
+    padding: 8px 10px;
+    flex: 1;
+  }
+  .stat-box .label { font-family: 'Space Mono', monospace; font-size: 5.5px; color: var(--text-secondary); display: block; margin-bottom: 3px; }
+  .stat-box .value { font-family: 'Bebas Neue', sans-serif; font-size: 14px; }
+  .stat-box .value.lime { color: var(--lime); }
+  .stat-box .value.pink { color: var(--pink); }
+
+  .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-top: 1px solid var(--border); }
+  .toggle-row:first-of-type { border-top: none; }
+  .toggle-row .t-label { font-size: 7px; font-weight: 700; }
+  .toggle-row .t-desc { font-size: 6px; color: var(--text-secondary); }
+  .switch { width: 22px; height: 12px; border-radius: 999px; position: relative; flex-shrink: 0; }
+  .switch.on { background: var(--lime); }
+  .switch.off { background: var(--bg-surface-raised); border: 1px solid var(--border); }
+  .switch::after { content:''; position:absolute; top:1px; width:9px; height:9px; border-radius:50%; background:#0d0d0f; }
+  .switch.on::after { right: 1.5px; background: #0d0d0f; }
+  .switch.off::after { left: 1.5px; background: var(--chrome-dark); }
+
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center; }
+  .cal-grid span { font-size: 6.5px; padding: 4px 0; border-radius: 4px; color: var(--text-secondary); }
+  .cal-grid span.sel { background: var(--pink); color: #fff; font-weight: 700; }
+
+  /* ---------- ASSETS SECTION ---------- */
+  .assets-section { background: var(--bg-surface); }
+
+  .swatch-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 64px; }
+  .swatch { width: 130px; }
+  .swatch .chip { width: 130px; height: 84px; border-radius: var(--r-md); border: 1px solid var(--border); margin-bottom: 8px; }
+  .swatch .name { font-weight: 700; font-size: 13px; }
+  .swatch .hex { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-secondary); }
+
+  .type-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 0; border-bottom: 1px solid var(--border);
+    gap: 24px; flex-wrap: wrap;
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-row .usage { color: var(--text-secondary); font-size: 12px; text-align: right; max-width: 280px; }
+  .type-row .usage .meta { display: block; margin-top: 4px; font-family: 'Space Mono', monospace; font-size: 10px; }
+
+  .typography-block { margin-bottom: 64px; }
+
+  .buttons-block { margin-bottom: 64px; }
+  .btn-demo-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
+  .btn-demo { padding: 14px 28px; font-size: 14px; font-weight: 500; }
+  .btn-note { color: var(--text-secondary); font-size: 13px; max-width: 700px; }
+
+  .decisions { display: flex; flex-direction: column; gap: 20px; }
+  .decision {
+    border-left: 2px solid var(--pink);
+    padding-left: 20px;
+  }
+  .decision h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .decision p { color: var(--text-secondary); font-size: 13.5px; line-height: 1.6; max-width: 760px; }
+
+  footer {
+    text-align: center;
+    padding: 60px 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 860px) {
+    .projeto-grid { grid-template-columns: 1fr; }
+    .wrap { padding: 0 24px; }
+    section { padding: 64px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow mono">DarkCat Studio // Case Study</span>
+    <h1>INKD.SYS</h1>
+    <p class="tagline">AGENDAMENTO DE TATUAGEM PARA A CENA CYBER-UNDERGROUND</p>
+    <p class="desc">Um app mobile de agendamento para estúdios de tatuagem, com estética cyberpunk/neon, feito para conectar artistas independentes a clientes que querem uma experiência de reserva tão marcante quanto a arte que vão levar pra vida.</p>
+  </div>
+</header>
+
+<!-- O PROJETO -->
+<section>
+  <div class="wrap">
+    <h2 class="section-title">O que é o INKD.SYS</h2>
+    <div class="projeto-grid">
+      <div>
+        <span class="kicker pink mono">Propósito</span>
+        <p>O INKD.SYS resolve a fricção entre encontrar um tatuador com o estilo certo e efetivamente marcar uma sessão. Ele reúne portfólio, agenda em tempo real, consentimento digital e histórico de sessões num único fluxo — pensado como uma plataforma de duas pontas: cliente e artista.</p>
+      </div>
+      <div>
+        <span class="kicker lime mono">Público-alvo</span>
+        <div class="persona-card">
+          <h3>Clientes</h3>
+          <p>Pessoas da cena alternativa que buscam artistas com estilo autoral — cyber, blackwork, fine line — e querem agendar sem trocar 20 mensagens no direct.</p>
+        </div>
+        <div class="persona-card">
+          <h3>Artistas &amp; Estúdios</h3>
+          <p>Tatuadores independentes que precisam de portfólio, agenda e cobrança de depósito num só lugar, sem depender de planilha e print de conversa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TELAS EM DESTAQUE -->
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Telas em destaque</h2>
+    <div class="gallery">
+
+      <!-- HOME -->
+      <div class="screen-item">
+        <div class="phone">
+          <div class="statusbar"><span>09:41</span><span class="right">NÚCLEO_MATRIX</span></div>
+          <div class="screen-header">
+            <span class="display" style="font-size:18px;">INKD.SYS</span>
+            <span class="mono" style="font-size:14px; color:var(--text-secondary);">🔔 👤</span>
+          </div>
+          <div class="screen-body">
+            <div class="banner">
+              <span class="label">PRÓXIMO AGENDAMENTO EM //</span>
+              <span class="value">AMANHÃ ÀS 14:00 — VEX GLITCH</span>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span class="display" style="font-size:13px;">Artistas Elite</span>
+                <span class="mono" style="font-size:6.5px; color:var(--pink);">VER_TUDO</span>
+              </div>
+              <div class="card-row">
+                <div style="flex:1;">
+                  <div class="thumb" style="height:64px;"></div>
+                  <div style="font-size:9px; font-weight:700; margin-top:4px;">Vex Glitch</div>
+                  <div class="mono" style="font-size:6px; color:var(--text-secondary);">★ Blackwork</div>
+                </div>
+                <div style="flex:1;">
+                  <div class="thumb" style="height:64px;"></div>
+                  <div style="font-size:9px; font-weight:700; margin-top:4px;">Suki Cyber</div>
+                  <div class="mono" style="font-size:6px; color:var(--text-secondary);">★ Neo-Trad</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="display" style="font-size:13px; display:block; margin-bottom:6px;">Estéticas em Alta</span>
+              <div style="display:flex; gap:6px;">
+                <span class="tag lime">[01] BLACKWORK</span>
+                <span class="tag pink">[02] CYBER GLITCH</span>
+              </div>
+            </div>
+            <div style="flex:1;"></div>
+            <div class="pill-btn lime" style="padding:11px; font-size:9px; font-weight:700;">INICIAR SEQUÊNCIA DE AGENDAMENTO</div>
+          </div>
+        </div>
+        <span class="caption mono">Home</span>
+      </div>
+
+      <!-- PERFIL ARTISTA -->
+      <div class="screen-item">
+        <div class="phone">
+          <div class="statusbar"><span>09:41</span><span class="right">PERFIL_ARTISTA</span></div>
+          <div class="thumb" style="height:150px; border-radius:0;"></div>
+          <div class="screen-body" style="padding-top:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <span class="display" style="font-size:20px;">Vex Glitch</span>
+              <span class="mono" style="font-size:8px; color:var(--lime);">★ 5.0</span>
+            </div>
+            <span class="mono" style="font-size:7px; color:var(--pink);">MESTRE EM BLACKWORK CIBERNÉTICO</span>
+            <p style="font-size:8px; color:var(--text-secondary); line-height:1.5;">Artista residente especializado em linhas cibernéticas de alta fidelidade, design glitch e revestimento bio-mecânico industrial.</p>
+            <div style="display:flex; gap:4px; flex-wrap:wrap;">
+              <span class="tag cyan">CYBER-GLITCH</span>
+              <span class="tag lime">BLACKWORK</span>
+              <span class="tag pink">ARTE GLITCH</span>
+            </div>
+            <span class="display" style="font-size:11px;">Portfólio Trabalhos_Recentes</span>
+            <div class="card-row">
+              <div class="thumb" style="flex:1; height:50px;"></div>
+              <div class="thumb" style="flex:1; height:50px;"></div>
+              <div class="thumb" style="flex:1; height:50px;"></div>
+            </div>
+            <div style="flex:1;"></div>
+            <div class="pill-btn outline" style="padding:9px; font-size:8px;">VER GALERIA COMPLETA →</div>
+            <div class="pill-btn pink" style="padding:11px; font-size:9px; font-weight:700;">AGENDAR SESSÃO</div>
+          </div>
+        </div>
+        <span class="caption mono">Perfil do Artista</span>
+      </div>
+
+      <!-- AGENDAMENTO -->
+      <div class="screen-item">
+        <div class="phone">
+          <div class="statusbar"><span>09:41</span><span class="right">SEQUÊNCIA_AGENDAMENTO</span></div>
+          <div class="screen-header">
+            <span class="mono" style="font-size:7px; color:var(--text-secondary);">← VOLTAR</span>
+          </div>
+          <div class="screen-body" style="padding-top:0;">
+            <span class="display" style="font-size:15px;">Selecionar Horário</span>
+            <p style="font-size:7px; color:var(--text-secondary);">Reserve seu horário com Vex Glitch.</p>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span class="mono" style="font-size:7px;">OUTUBRO 2026</span>
+                <span class="mono" style="font-size:6px; color:var(--text-secondary);">ANT / PRÓX</span>
+              </div>
+              <div class="cal-grid">
+                <span>12</span><span>13</span><span>14</span><span class="sel">15</span><span>16</span><span>17</span><span>18</span>
+              </div>
+            </div>
+            <div>
+              <span class="mono" style="font-size:7px; display:block; margin-bottom:6px;">DURAÇÃO_SESSÃO</span>
+              <div style="display:flex; gap:4px;">
+                <span class="tag" style="background:var(--bg-surface-raised); color:var(--text-secondary);">1H FLASH</span>
+                <span class="tag lime">2H MÉD</span>
+                <span class="tag" style="background:var(--bg-surface-raised); color:var(--text-secondary);">3H+ COMPLETA</span>
+              </div>
+            </div>
+            <div style="flex:1;"></div>
+            <div class="pill-btn lime" style="padding:11px; font-size:9px; font-weight:700;">CONFIRMAR AGENDA</div>
+          </div>
+        </div>
+        <span class="caption mono">Agendamento</span>
+      </div>
+
+      <!-- ARTISTAS & PIERCINGS -->
+      <div class="screen-item">
+        <div class="phone">
+          <div class="statusbar"><span>09:41</span><span class="right">DIRETÓRIO_ARTISTAS</span></div>
+          <div class="screen-header">
+            <span class="mono" style="font-size:7px; color:var(--text-secondary);">← VOLTAR</span>
+          </div>
+          <div class="screen-body" style="padding-top:0;">
+            <span class="display" style="font-size:15px;">Artistas &amp; Piercings</span>
+            <div style="display:flex; gap:6px;">
+              <span class="pill-btn outline" style="padding:5px 10px; font-size:7px; border-color:var(--lime); color:var(--lime);">TATUADORES</span>
+              <span class="pill-btn outline" style="padding:5px 10px; font-size:7px;">BODY PIERCINGS</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; gap:8px; align-items:center; background:var(--bg-surface-raised); padding:8px; border-radius:6px;">
+                <div class="thumb avatar-thumb"></div>
+                <div style="flex:1;">
+                  <div style="font-size:9px; font-weight:700;">Vex Glitch</div>
+                  <div class="mono" style="font-size:6px; color:var(--lime);">BLACKWORK · ★5.0</div>
+                </div>
+                <span class="pill-btn pink" style="padding:5px 9px; font-size:7px;">AGENDAR</span>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center; background:var(--bg-surface-raised); padding:8px; border-radius:6px;">
+                <div class="thumb avatar-thumb"></div>
+                <div style="flex:1;">
+                  <div style="font-size:9px; font-weight:700;">Suki Cyber</div>
+                  <div class="mono" style="font-size:6px; color:var(--pink);">NEO-TRAD · ★4.8</div>
+                </div>
+                <span class="pill-btn pink" style="padding:5px 9px; font-size:7px;">AGENDAR</span>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center; background:var(--bg-surface-raised); padding:8px; border-radius:6px;">
+                <div class="thumb avatar-thumb"></div>
+                <div style="flex:1;">
+                  <div style="font-size:9px; font-weight:700;">Luna Nyx</div>
+                  <div class="mono" style="font-size:6px; color:var(--cyan);">FINE LINE · ★4.9</div>
+                </div>
+                <span class="pill-btn pink" style="padding:5px 9px; font-size:7px;">AGENDAR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="caption mono">Artistas &amp; Piercings</span>
+      </div>
+
+      <!-- PORTFOLIO -->
+      <div class="screen-item">
+        <div class="phone">
+          <div class="statusbar"><span>09:41</span><span class="right">PORTFÓLIO_ARTISTA</span></div>
+          <div class="screen-header">
+            <span class="mono" style="font-size:7px; color:var(--text-secondary);">← VOLTAR</span>
+          </div>
+          <div class="screen-body" style="padding-top:0;">
+            <span class="display" style="font-size:15px;">Trabalhos Recentes</span>
+            <p style="font-size:7px; color:var(--text-secondary);">Galeria de trabalhos do artista VEX_GLITCH</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <div><div class="thumb" style="height:55px;"></div><div class="mono" style="font-size:5.5px; color:var(--text-secondary); margin-top:2px;">GEOMÉTRICO BLACKWORK</div></div>
+              <div><div class="thumb" style="height:55px;"></div><div class="mono" style="font-size:5.5px; color:var(--text-secondary); margin-top:2px;">CYBER BIOMECÂNICO</div></div>
+              <div><div class="thumb" style="height:55px;"></div><div class="mono" style="font-size:5.5px; color:var(--text-secondary); margin-top:2px;">MANDALA DARK</div></div>
+              <div><div class="thumb" style="height:55px;"></div><div class="mono" style="font-size:5.5px; color:var(--text-secondary); margin-top:2px;">CAVEIRA GLITCH</div></div>
+            </div>
+            <div style="flex:1;"></div>
+            <div class="pill-btn lime" style="padding:11px; font-size:9px; font-weight:700;">AGENDAR COM ESTE ARTISTA</div>
+          </div>
+        </div>
+        <span class="caption mono">Portfólio</span>
+      </div>
+
+      <!-- PERFIL USUARIO -->
+      <div class="screen-item">
+        <div class="phone">
+          <div class="statusbar"><span>09:41</span><span class="right">PERFIL_MEMBRO</span></div>
+          <div class="screen-header">
+            <span class="mono" style="font-size:7px; color:var(--text-secondary);">← VOLTAR</span>
+          </div>
+          <div class="screen-body" style="padding-top:0;">
+            <span class="display" style="font-size:15px;">Perfil Membro</span>
+            <p style="font-size:7px; color:var(--text-secondary);">Sincronize suas configurações e preferências.</p>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <div class="thumb avatar-thumb" style="width:36px; height:36px; border-radius:50%;"></div>
+              <div>
+                <div style="font-size:10px; font-weight:700;">Katty Neon</div>
+                <div class="mono" style="font-size:6px; color:var(--text-secondary);">MEMBRO SP // DESDE_2024</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <div class="stat-box"><span class="label">TOTAL_SESSÕES</span><span class="value lime">5 MODIFICAÇÕES</span></div>
+              <div class="stat-box"><span class="label">HORAS_NA_AGULHA</span><span class="value pink">14.5 HRS</span></div>
+            </div>
+            <div>
+              <span class="mono" style="font-size:6.5px; color:var(--text-secondary); display:block; margin-bottom:4px;">PREFERÊNCIAS_NOTIFICAÇÃO</span>
+              <div class="toggle-row">
+                <div><div class="t-label">Lembretes de Agendamento</div><div class="t-desc">Receber alertas via SMS</div></div>
+                <div class="switch on"></div>
+              </div>
+              <div class="toggle-row">
+                <div><div class="t-label">Drops Exclusivos de Flash</div><div class="t-desc">Acesso antecipado a vagas</div></div>
+                <div class="switch off"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="caption mono">Perfil do Usuário</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ASSETS -->
+<section class="assets-section">
+  <div class="wrap">
+    <h2 class="section-title">Assets — Sistema de Design</h2>
+
+    <!-- CORES -->
+    <div>
+      <span class="kicker pink mono">Paleta de Cores</span>
+      <div class="swatch-row">
+        <div class="swatch"><div class="chip" style="background:#0d0d0f;"></div><div class="name">bg/base</div><div class="hex">#0D0D0F</div></div>
+        <div class="swatch"><div class="chip" style="background:#17171b;"></div><div class="name">bg/surface</div><div class="hex">#17171B</div></div>
+        <div class="swatch"><div class="chip" style="background:#1f1f24;"></div><div class="name">surface-raised</div><div class="hex">#1F1F24</div></div>
+        <div class="swatch"><div class="chip" style="background:#ff2d78;"></div><div class="name">accent/pink</div><div class="hex">#FF2D78</div></div>
+        <div class="swatch"><div class="chip" style="background:#b6ff00;"></div><div class="name">accent/lime</div><div class="hex">#B6FF00</div></div>
+        <div class="swatch"><div class="chip" style="background:#9d00ff;"></div><div class="name">accent/violet</div><div class="hex">#9D00FF</div></div>
+        <div class="swatch"><div class="chip" style="background:#00f0ff;"></div><div class="name">accent/cyan</div><div class="hex">#00F0FF</div></div>
+        <div class="swatch"><div class="chip" style="background:#c8ccd1;"></div><div class="name">chrome/silver</div><div class="hex">#C8CCD1</div></div>
+      </div>
+    </div>
+
+    <!-- TIPOGRAFIA -->
+    <div class="typography-block">
+      <span class="kicker pink mono">Tipografia</span>
+      <div class="type-row">
+        <span class="display" style="font-size:44px;">Display / Bebas Neue</span>
+        <span class="usage">Títulos, headers, impacto visual — uppercase por padrão<span class="meta">Bebas Neue Regular · 48px</span></span>
+      </div>
+      <div class="type-row">
+        <span style="font-weight:700; font-size:20px;">Corpo em destaque / Space Grotesk Bold</span>
+        <span class="usage">Subtítulos, nomes de artista, CTAs<span class="meta">Space Grotesk Bold · 20px</span></span>
+      </div>
+      <div class="type-row">
+        <span style="font-size:16px;">Texto de corpo / Space Grotesk Regular</span>
+        <span class="usage">Parágrafos, descrições<span class="meta">Space Grotesk Regular · 16px</span></span>
+      </div>
+      <div class="type-row">
+        <span class="mono" style="font-size:13px;">Labels_Mono / Space_Mono</span>
+        <span class="usage">Tags, timestamps, microcopy técnico<span class="meta">Space Mono Regular · 13px</span></span>
+      </div>
+    </div>
+
+    <!-- BOTOES -->
+    <div class="buttons-block">
+      <span class="kicker pink mono">Botões</span>
+      <div class="btn-demo-row">
+        <span class="pill-btn lime btn-demo">Primário — Ação Principal</span>
+        <span class="pill-btn pink btn-demo">Secundário — Agendar</span>
+        <span class="pill-btn outline btn-demo">Outline — Ver Mais</span>
+      </div>
+      <p class="btn-note">Formato pill (radius total), preenchimento sólido para CTAs primárias e contorno para ações secundárias — mantém hierarquia clara mesmo com paleta neon de alto contraste.</p>
+    </div>
+
+    <!-- DECISOES -->
+    <div>
+      <span class="kicker pink mono">Decisões de UI/UX</span>
+      <div class="decisions" style="margin-top:20px;">
+        <div class="decision">
+          <h3>Tema escuro como padrão</h3>
+          <p>A base quase preta (#0D0D0F) faz as fotos de tatuagem e os acentos neon serem o foco visual — sem competir com o fundo, e reduz fadiga em uso noturno, comum no público-alvo.</p>
+        </div>
+        <div class="decision">
+          <h3>Paleta neon com propósito, não decoração</h3>
+          <p>Rosa, lima, violeta e ciano são usados como código de estado e hierarquia (CTA primária, tag de estilo, destaque de seleção), não espalhados aleatoriamente — cada cor tem um papel funcional fixo.</p>
+        </div>
+        <div class="decision">
+          <h3>Bebas Neue para impacto tipográfico</h3>
+          <p>Títulos em caixa alta e condensados reforçam a identidade "cyber-industrial" e criam contraste forte com o corpo de texto em Space Grotesk, mais legível em blocos longos.</p>
+        </div>
+        <div class="decision">
+          <h3>Cards com borda sutil em vez de sombra</h3>
+          <p>Como o fundo já é escuro, sombras tradicionais quase não aparecem — bordas de 1px em tom cinza-azulado (#2A2A30) fazem a separação de camadas sem "sujar" a composição.</p>
+        </div>
+        <div class="decision">
+          <h3>Fluxo de duas pontas (cliente + artista)</h3>
+          <p>Onboarding do artista foi desenhado separadamente da jornada do cliente — telas de agenda, portfólio e disponibilidade têm hierarquia de informação diferente, pensada pra quem gerencia o negócio, não só pra quem agenda.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="mono">INKD.SYS — Case Study by DarkCat Studio</footer>
+
+</body>
+</html>
